@@ -25,6 +25,7 @@ from it_office_inventary import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('inventory.urls')),
+    path('', include('core.urls'))
 ]
 
 if settings.DEBUG:

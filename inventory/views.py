@@ -6,7 +6,7 @@ from django.views.generic import (
     DetailView,
     CreateView,
     UpdateView,
-    DeleteView, )
+    DeleteView, TemplateView, )
 
 from inventory.forms import SupplyForm
 from inventory.models import WorkStation, Supply
@@ -14,9 +14,10 @@ from inventory.models import WorkStation, Supply
 
 # Create your views here.
 
-def index(request):
-    return render(request, 'inventory/index.html')
 
+# ===========================================
+# WS Models
+# ===========================================
 class WorkStationList(ListView):
     model = WorkStation
     fields = '__all__'
@@ -42,6 +43,9 @@ class WorkStationDelete(DeleteView):
     success_url = reverse_lazy('workstation-list')
 
 
+# ==============================================
+# Supply model
+# ==============================================
 def list_supplies(request):
     supplies_query = Supply.objects.all()
     queried_supply = request.GET.get('q')
@@ -56,7 +60,7 @@ def supply_detail(request, slug):
     try:
         supply = Supply.objects.get(slug=slug)
     except Supply.DoesNotExist:
-        return render(request, "error_404.html")
+        return render(request, "core/404.html")
     context = {'supply': supply}
 
     return render(request, "inventory/supply_detail.html", context)

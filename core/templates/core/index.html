@@ -1,0 +1,61 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+<title>Home - IT Inventario</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="text-center mb-5">
+    <h1 class="display-5">IT Inventory System</h1>
+    <p class="lead">Gestión de insumos y estaciones de trabajo</p>
+</div>
+
+<div class="row text-light">
+
+    <!-- WORKSTATIONS -->
+    <div class="col-md-6 mb-4">
+        <div class="card p-4 h-100 text-light">
+            <h3>Work Stations</h3>
+            <p>
+                Administrá las estaciones de trabajo, su estado, ubicación y detalles técnicos.
+            </p>
+
+            <a href="{% url 'workstation-list' %}" class="btn btn-primary">
+                Ver Workstations
+            </a>
+        </div>
+    </div>
+
+    <!-- SUPPLIES -->
+    <div class="col-md-6 mb-4">
+        <div class="card p-4 h-100 text-light">
+            <h3>Insumos</h3>
+            <p>
+                Control de stock de cables, hardware, herramientas y otros recursos IT.
+            </p>
+
+            <a href="{% url 'supplies-list' %}" class="btn btn-primary">
+                Ver Insumos
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<hr class="my-5">
+
+<!-- INFO EXTRA -->
+<div class="card p-4 text-center text-light">
+    <h4>Sobre el sistema</h4>
+    <p>
+        Este sistema permite gestionar inventario IT mediante operaciones CRUD,
+        con autenticación de usuarios y administración centralizada.
+    </p>
+
+    <a href="{% url 'about' %}" class="btn btn-outline-light">
+        Acerca de mí
+    </a>
+</div>
+
+{% endblock %}

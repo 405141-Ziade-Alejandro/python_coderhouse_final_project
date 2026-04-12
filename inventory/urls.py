@@ -2,8 +2,6 @@ from django.urls import path
 from inventory import views
 
 urlpatterns = [
-    # home
-    path('', views.index, name='index'),
     # Workstation
     path('workstations/', views.WorkStationList.as_view(), name='workstation-list'),
     path('workstations/<int:pk>/', views.WorkStationDetail.as_view(), name='workstation-detail'),
@@ -14,7 +12,7 @@ urlpatterns = [
     # supply
     path('supplies/', views.list_supplies, name='supplies-list'),
     path('supplies/<slug:slug>/', views.supply_detail, name='supplies-detail'),
-    path('supplies/create/',views.create_supply, name='supplies-create'),
-    path('supplies/<slug:slug>/update/',views.update_supply, name='supplies-update'),
-    path('supplies/<slug:slug>/delete/',views.delete_supply, name='supplies-delete'),
+    path('supplies/create/', views.create_supply, name='supplies-create'),
+    path('supplies/<slug:slug>/update/', views.update_supply, name='supplies-update'),
+    path('supplies/<slug:slug>/delete/', views.delete_supply, name='supplies-delete'),
 ]
