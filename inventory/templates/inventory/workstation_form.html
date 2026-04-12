@@ -1,0 +1,56 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+<title>
+    {% if object %}
+        Editar WorkStation
+    {% else %}
+        Crear WorkStation
+    {% endif %}
+</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+
+        <div class="card p-4 text-light">
+
+            <h2 class="mb-3 text-center">
+                {% if object %}
+                    Editar WorkStation {{ object.code }}
+                {% else %}
+                    Nueva WorkStation
+                {% endif %}
+            </h2>
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <div class="d-flex justify-content-between mt-3">
+
+                    <a href="{% url 'workstation-list' %}" class="btn btn-secondary">
+                        Cancelar
+                    </a>
+
+                    <button type="submit" class="btn btn-success">
+                        {% if object %}
+                            Guardar cambios
+                        {% else %}
+                            Crear
+                        {% endif %}
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

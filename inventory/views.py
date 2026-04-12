@@ -32,11 +32,13 @@ class WorkStationDetail(DetailView):
 class WorkStationCreate(CreateView):
     model = WorkStation
     fields = '__all__'
+    success_url = reverse_lazy('workstation-list')
 
 
 class WorkStationUpdate(UpdateView):
     model = WorkStation
     fields = '__all__'
+    success_url = reverse_lazy('workstation-list')
 
 
 class WorkStationDelete(DeleteView):

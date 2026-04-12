@@ -1,0 +1,57 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+<title>WorkStation {{ object.code }}</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+
+        <div class="card p-4 text-light">
+
+            <h2>WorkStation {{ object.code }}</h2>
+            <hr>
+
+            <p><strong>Área de origen:</strong> {{ object.origin_area }}</p>
+            <p><strong>Usuario asignado:</strong> {{ object.ws_user }}</p>
+            <p><strong>Estado:</strong> {{ object.state }}</p>
+            <p><strong>Fecha de ingreso:</strong> {{ object.date_received }}</p>
+
+            <hr>
+
+            <p><strong>Descripción:</strong></p>
+            <p>{{ object.description }}</p>
+
+            <hr>
+
+            <!-- IMAGEN -->
+            {% if object.image %}
+                <img src="{{ object.image.url }}" class="img-fluid mb-3" alt="imagen">
+            {% endif %}
+
+            <div class="d-flex justify-content-between">
+
+                <a href="{% url 'workstation-list' %}" class="btn btn-secondary">
+                    Volver
+                </a>
+
+                <div>
+                    <a href="{% url 'workstation-update' object.pk %}" class="btn btn-warning">
+                        Editar
+                    </a>
+
+                    <a href="{% url 'workstation-delete' object.pk %}" class="btn btn-danger">
+                        Borrar
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
