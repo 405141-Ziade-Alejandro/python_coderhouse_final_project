@@ -1,0 +1,77 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+<title>Insumos</title>
+{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">Listado de Insumos</h2>
+
+<!-- BUSCADOR -->
+<form method="get" class="mb-4">
+    <div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder="Buscar insumo...">
+        <button class="btn btn-outline-light" type="submit">Buscar</button>
+    </div>
+</form>
+
+<!-- BOTÓN CREAR -->
+<div class="mb-3">
+    <a href="{% url 'supplies-create' %}" class="btn btn-success">
+        + Nuevo Insumo
+    </a>
+</div>
+
+<!-- LISTADO -->
+{% if supply_list %}
+
+    <div class="row">
+        {% for supply in supply_list %}
+            <div class="col-md-4 mb-4">
+
+                <div class="card p-3 h-100 text-light">
+
+                    <h5>{{ supply.name }}</h5>
+
+                    <p>
+                        <strong>Tipo:</strong> {{ supply.type }}
+                    </p>
+
+                    <p>
+                        <strong>Stock:</strong> {{ supply.stock }}
+                    </p>
+
+                    <!-- BOTONES -->
+                    <div class="mt-auto d-flex justify-content-between">
+
+                        <a href="{% url 'supplies-detail' supply.slug %}" class="btn btn-sm btn-outline-light">
+                            Ver
+                        </a>
+
+                        <a href="{% url 'supplies-update' supply.slug %}" class="btn btn-sm btn-warning">
+                            Editar
+                        </a>
+
+                        <a href="{% url 'supplies-delete' supply.slug %}" class="btn btn-sm btn-danger">
+                            Borrar
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+
+{% else %}
+
+    <!-- MENSAJE REQUERIDO POR CONSIGNA -->
+    <div class="card p-4 text-center text-light">
+        <p>No hay insumos cargados o no se encontraron resultados.</p>
+    </div>
+
+{% endif %}
+
+{% endblock %}

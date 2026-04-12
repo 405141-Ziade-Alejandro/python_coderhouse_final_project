@@ -8,6 +8,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView, TemplateView, )
 
+import inventory
 from inventory.forms import SupplyForm
 from inventory.models import WorkStation, Supply
 
@@ -71,7 +72,7 @@ def create_supply(request):
         form = SupplyForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('list-supplies')
+            return redirect('supplies-list')
     else:
         form = SupplyForm()
     return render(request, 'inventory/create_supply.html', {"form": form})
@@ -83,7 +84,7 @@ def update_supply(request, slug):
         form = SupplyForm(request.POST, instance=supply)
         if form.is_valid():
             form.save()
-            return redirect('list-supplies')
+            return redirect('supplies-list')
     else:
         form = SupplyForm(instance=supply)
     return render(request, 'inventory/update_supply.html', {"form": form})
@@ -93,5 +94,6 @@ def delete_supply(request, slug):
     supply = get_object_or_404(Supply, slug=slug)
     if request.method == 'POST':
         supply.delete()
-        return redirect('list-supplies')
-    return redirect('list-supplies')
+        return redirect('supplies-list')
+
+    return render(request, 'inventory/confirm_delete.html', {"supply": supply})

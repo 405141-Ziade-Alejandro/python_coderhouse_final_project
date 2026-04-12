@@ -1,0 +1,40 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+<title>Editar Insumo</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+
+        <div class="card p-4 text-light">
+
+            <h2 class="mb-3 text-center">Editar Insumo</h2>
+
+            <form method="post">
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <div class="d-flex justify-content-between mt-3">
+
+                    <a href="{% url 'supplies-detail' form.instance.slug %}" class="btn btn-secondary">
+                        Cancelar
+                    </a>
+
+                    <button type="submit" class="btn btn-warning">
+                        Guardar cambios
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

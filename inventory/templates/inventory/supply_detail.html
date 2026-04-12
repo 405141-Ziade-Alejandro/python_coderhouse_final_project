@@ -1,0 +1,51 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+<title>{{ supply.name }}</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+
+        <div class="card p-4 text-light">
+
+            <h2>{{ supply.name }}</h2>
+            <hr>
+
+            <p><strong>Tipo:</strong> {{ supply.type }}</p>
+            <p><strong>Stock:</strong> {{ supply.stock }}</p>
+            <p><strong>Ubicación:</strong> {{ supply.location }}</p>
+
+            <hr>
+
+            <p><strong>Descripción:</strong></p>
+            <p>{{ supply.description }}</p>
+
+            <hr>
+
+            <div class="d-flex justify-content-between">
+
+                <a href="{% url 'supplies-list' %}" class="btn btn-secondary">
+                    Volver
+                </a>
+
+                <div>
+                    <a href="{% url 'supplies-update' supply.slug %}" class="btn btn-warning">
+                        Editar
+                    </a>
+
+                    <a href="{% url 'supplies-delete' supply.slug %}" class="btn btn-danger">
+                        Borrar
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
