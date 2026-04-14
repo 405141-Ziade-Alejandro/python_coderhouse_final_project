@@ -13,6 +13,11 @@
                 <h2 class="mb-3 text-center">Perfil</h2>
 
                 <hr>
+                {% if user.profile.avatar %}
+                    <img src="{{ user.profile.avatar.url }}" width="150">
+                {% else %}
+                    <p>No tiene avatar</p>
+                {% endif %}
 
                 <p><strong>Username:</strong> {{ user.username }}</p>
                 <p><strong>Email:</strong> {{ user.email }}</p>
@@ -20,8 +25,12 @@
                 <hr>
 
                 <div class="d-grid gap-2">
-                    <a href="#" class="btn btn-outline-light">
+                    <a href="{% url 'edit-profile' %}" class="btn btn-outline-light">
                         Editar perfil
+                    </a>
+
+                    <a href="{% url 'password-change' %}" class="btn btn-warning">
+                        Cambiar contraseña
                     </a>
 
                     <a href="/logout/" class="btn btn-danger">

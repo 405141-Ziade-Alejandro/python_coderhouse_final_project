@@ -7,6 +7,8 @@ from django.views.generic import (
     CreateView,
     UpdateView,
     DeleteView, TemplateView, )
+from django.contrib.auth.decorators import login_required
+
 
 import inventory
 from inventory.forms import SupplyForm
@@ -29,19 +31,19 @@ class WorkStationDetail(DetailView):
     fields = '__all__'
 
 
-class WorkStationCreate(CreateView):
+class WorkStationCreate(LoginRequiredMixin, CreateView):
     model = WorkStation
     fields = '__all__'
     success_url = reverse_lazy('workstation-list')
 
 
-class WorkStationUpdate(UpdateView):
+class WorkStationUpdate(LoginRequiredMixin, UpdateView):
     model = WorkStation
     fields = '__all__'
     success_url = reverse_lazy('workstation-list')
 
 
-class WorkStationDelete(DeleteView):
+class WorkStationDelete(LoginRequiredMixin, DeleteView):
     model = WorkStation
     success_url = reverse_lazy('workstation-list')
 
@@ -68,7 +70,7 @@ def supply_detail(request, slug):
 
     return render(request, "inventory/supply_detail.html", context)
 
-
+@login_required
 def create_supply(request):
     if request.method == 'POST':
         form = SupplyForm(request.POST)
@@ -79,7 +81,7 @@ def create_supply(request):
         form = SupplyForm()
     return render(request, 'inventory/create_supply.html', {"form": form})
 
-
+@login_required
 def update_supply(request, slug):
     supply = get_object_or_404(Supply, slug=slug)
     if request.method == 'POST':
@@ -91,7 +93,7 @@ def update_supply(request, slug):
         form = SupplyForm(instance=supply)
     return render(request, 'inventory/update_supply.html', {"form": form})
 
-
+@login_required
 def delete_supply(request, slug):
     supply = get_object_or_404(Supply, slug=slug)
     if request.method == 'POST':
