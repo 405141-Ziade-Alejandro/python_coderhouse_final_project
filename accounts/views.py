@@ -65,7 +65,7 @@ def profile_view(request):
 @login_required
 def edit_profile(request):
     user_form = CustomUserChangeForm(request.POST or None, instance=request.user)
-    profile_form = ProfileForm(request.POST or None, request.FILES or None, instance=request.user)
+    profile_form = ProfileForm(request.POST or None, request.FILES or None, instance=request.user.profile)
 
     if request.method == 'POST':
         if user_form.is_valid() and profile_form.is_valid():
